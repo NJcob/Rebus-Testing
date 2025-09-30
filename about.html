@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rebus Official | Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style/style.css">
+  <script src="script/carousel.js"></script>
+  <script src="script/logos-loop.js"></script>
+  <script src="script/nav.js"></script>
+  <script src="script/nav-animations.js"></script>
+  <script src="script/complete-animation.js"></script>
+  <script src="script/smooth.js"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/CSSPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+  <script src="https://assets.codepen.io/16327/DrawSVGPlugin3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+</head>
+<body>
+
+  <style>
+  @font-face {
+  font-family: "Avenir Next LT Pro";
+  src: url("font/Avenir\ Next\ LT\ Pro\ Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* ensures text is visible while font loads */
+}
+/* Universal font for all elements */
+html, body, * {
+  font-family: "Avenir Next LT Pro", sans-serif !important;
+}
+</style>
+<!--
+<section id="loading-screen" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #122566;
+    z-index: 9999;
+    pointer-events: none; /* <- ignore all hover/mouse events */
+">
+  <div style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 73 73"
+         style="
+             width: 100%;
+             height: 100%;
+             overflow: visible;
+             animation: glowPulse 1.5s infinite alternate;
+         "
+         preserveAspectRatio="xMidYMid meet">
+       <path fill="#8DB9E0" fill-rule="evenodd" d="M14.629 49.663c-.435-.964-1.11-1.604-1.516-1.428-.405.175-.383 1.105.052 2.069.435.963 1.11 1.604 1.515 1.428.406-.176.383-1.105-.051-2.069Zm-2.603-3.417c-.206-.952-.623-1.672-.932-1.61-.303.068-.383.89-.177 1.848.206.958.623 1.673.932 1.61.309-.062.383-.89.177-1.848Zm.49-4.496c-.115-1.048-.538-1.859-.955-1.813-.418.045-.658.924-.55 1.972.115 1.049.538 1.86.956 1.814.417-.045.657-.924.549-1.972Zm-2.173-4.39c-.189 0-.343.76-.343 1.7 0 .941.154 1.7.343 1.7.189 0 .343-.759.343-1.7 0-.94-.154-1.7-.343-1.7Zm10.904 2.84c-1.39.086-2.436 1.474-2.333 3.107.103 1.633 1.31 2.886 2.699 2.8 1.389-.084 2.435-1.473 2.332-3.106-.102-1.633-1.309-2.885-2.698-2.8Z" clip-rule="evenodd"/>
+        <path fill="#8DB9E0" d="M16.452 41.716c.834 0 1.51-1.035 1.51-2.313 0-1.277-.676-2.312-1.51-2.312-.833 0-1.51 1.035-1.51 2.313 0 1.277.677 2.312 1.51 2.312Z"/>
+        <path fill="#8DB9E0" fill-rule="evenodd" d="M16.642 28.17c-.692-.289-1.692.528-2.241 1.82-.55 1.293-.429 2.568.257 2.857.692.29 1.693-.527 2.242-1.82.548-1.292.428-2.567-.258-2.856Zm3.486 1.979c-1.144-.323-2.43.635-2.865 2.143-.435 1.508.143 2.993 1.286 3.316 1.144.323 2.43-.635 2.865-2.143.435-1.508-.143-2.993-1.286-3.316ZM25.166 33c-1.527-.198-2.95 1.077-3.185 2.846-.234 1.769.812 3.367 2.339 3.56 1.526.199 2.95-1.077 3.185-2.846.234-1.768-.812-3.367-2.339-3.56Zm-.225-8.7c-.846-.754-2.396-.402-3.465.777-1.07 1.18-1.246 2.75-.406 3.498.846.754 2.396.402 3.465-.777 1.07-1.18 1.247-2.75.406-3.498Zm6.281 2.318c-1.115-1.077-3.07-.89-4.357.426-1.287 1.315-1.43 3.248-.309 4.33 1.115 1.078 3.07.89 4.357-.425 1.287-1.315 1.43-3.248.309-4.33Z" clip-rule="evenodd"/>
+        <path fill="#8DB9E0" d="M31.75 43.345c1.78 0 3.224-1.462 3.224-3.265 0-1.803-1.443-3.265-3.224-3.265-1.782 0-3.225 1.462-3.225 3.265 0 1.803 1.444 3.265 3.225 3.265Zm4.184-7.617c1.743 0 3.156-1.37 3.156-3.062 0-1.69-1.413-3.06-3.156-3.06s-3.157 1.37-3.157 3.06c0 1.691 1.413 3.062 3.157 3.062Z"/>
+        <path fill="#8DB9E0" fill-rule="evenodd" d="M29.513 19.492c-.526-.833-1.996-.856-3.288-.056-1.287.799-1.904 2.125-1.378 2.959.526.833 1.995.856 3.288.056 1.286-.799 1.904-2.125 1.378-2.959Zm7.317-2.678c-1.401 0-2.539.669-2.539 1.496 0 .828 1.138 1.497 2.539 1.497 1.4 0 2.539-.67 2.539-1.497 0-.827-1.138-1.496-2.54-1.496Z" clip-rule="evenodd"/>
+        <path fill="#8DB9E0" d="M39.987 28.788c1.781 0 3.225-1.25 3.225-2.79s-1.444-2.789-3.225-2.789c-1.78 0-3.224 1.25-3.224 2.79s1.443 2.789 3.224 2.789Z"/>
+        <path fill="#8DB9E0" fill-rule="evenodd" d="M50.93 22.873c-1.286-1.014-2.887-1.139-3.568-.289-.68.856-.188 2.364 1.098 3.379 1.287 1.015 2.888 1.14 3.568.29.68-.857.189-2.365-1.098-3.38Z" clip-rule="evenodd"/>
+        <path fill="#8DB9E0" d="M43.481 39.948c1.744 0 3.157-1.432 3.157-3.198 0-1.765-1.413-3.197-3.157-3.197-1.743 0-3.156 1.432-3.156 3.197 0 1.766 1.413 3.198 3.156 3.198Z"/>
+        <path fill="#8DB9E0" fill-rule="evenodd" d="M50.567 37.907c-1.475-.073-2.745 1.202-2.83 2.852-.086 1.65 1.04 3.05 2.516 3.129 1.475.074 2.744-1.202 2.83-2.852.086-1.65-1.04-3.05-2.516-3.129Zm2.585-7.077c-1.052.046-1.847 1.424-1.767 3.079.074 1.65.99 2.953 2.041 2.902 1.052-.045 1.847-1.423 1.767-3.078-.074-1.65-.99-2.953-2.041-2.902Zm7.916 1.257c-.418-1.395-1.327-2.359-2.03-2.149-.704.21-.932 1.508-.515 2.897.417 1.394 1.327 2.358 2.03 2.148.703-.21.932-1.508.515-2.896Zm2.352 3.864c-.19-1.332-.71-2.364-1.167-2.296-.457.063-.68 1.196-.492 2.529.19 1.332.71 2.364 1.167 2.296.457-.063.68-1.197.492-2.529Zm-3.2 1.917c-.12-1.599-1.052-2.829-2.07-2.755-1.018.074-1.75 1.434-1.624 3.033.12 1.598 1.052 2.828 2.07 2.755 1.018-.074 1.75-1.435 1.624-3.033Zm-46.497-3.752c-.635-.12-1.332.754-1.555 1.95-.223 1.196.108 2.256.743 2.375.635.12 1.332-.754 1.555-1.95.223-1.196-.108-2.256-.743-2.375Zm49.937 7.406c-.383-.062-.863.913-1.069 2.172-.206 1.264-.063 2.335.32 2.398.383.062.864-.913 1.07-2.172.205-1.264.062-2.335-.32-2.398Zm-7.179-.14c-1.172-.244-2.407.913-2.756 2.58-.348 1.666.315 3.214 1.487 3.457 1.172.244 2.407-.912 2.756-2.579.349-1.667-.315-3.214-1.487-3.458ZM18.865 53.338c-.738-.952-1.727-1.428-2.207-1.06-.48.369-.27 1.434.468 2.387.738.952 1.727 1.428 2.208 1.06.48-.369.268-1.434-.47-2.387Zm-3.07-8.334c-.298-1.145-1.081-1.933-1.739-1.763-.657.17-.949 1.247-.651 2.392.297 1.145 1.08 1.933 1.738 1.763.657-.176.949-1.247.652-2.392ZM50.06 28.59c-.88-1.467-2.848-2.114-4.397-1.445-1.55.67-2.093 2.41-1.213 3.878.881 1.468 2.848 2.114 4.397 1.445 1.55-.669 2.093-2.409 1.213-3.877Zm6.406-1.874c-1.104-1.174-2.482-1.35-3.082-.391-.595.952-.183 2.675.92 3.849 1.104 1.173 2.482 1.35 3.082.391.595-.952.183-2.676-.92-3.85Zm5.068 11.734c-.68-.018-1.27 1.15-1.31 2.618-.04 1.463.481 2.67 1.162 2.687.68.017 1.269-1.15 1.309-2.619.04-1.462-.48-2.67-1.16-2.687ZM36.42 21.747c-.354-1.219-2.058-1.74-3.802-1.157-1.744.584-2.876 2.047-2.522 3.266.355 1.219 2.059 1.74 3.803 1.156 1.744-.584 2.876-2.046 2.521-3.265Zm7.302-2.83c-1.332-.47-2.647-.051-2.933.935-.286.981.566 2.16 1.904 2.63 1.332.471 2.647.052 2.933-.935.286-.98-.566-2.16-1.904-2.63Zm2.488-2.621c-1.179-.481-2.368-.362-2.665.261-.292.624.423 1.52 1.6 2.001 1.178.482 2.368.363 2.665-.26.292-.624-.423-1.52-1.6-2.002ZM20.519 22.81c-.435-.413-1.504.13-2.39 1.22-.887 1.087-1.247 2.3-.812 2.714.434.414 1.503-.13 2.39-1.218.886-1.089 1.246-2.302.812-2.716Zm-8.564 9.306c-.332-.085-.829.731-1.11 1.825-.285 1.094-.245 2.047.087 2.132.331.085.829-.732 1.109-1.826.286-1.094.246-2.046-.086-2.131Zm2.385-4.918c-.348-.227-.983.374-1.418 1.35-.434.974-.497 1.95-.148 2.176.348.227.983-.374 1.418-1.35.434-.974.497-1.95.148-2.176Z" clip-rule="evenodd"/>
+    </svg>
+  </div>
+</section>
+
+<script>
+const loadingScreen = document.getElementById("loading-screen");
+const paths = document.querySelectorAll("#loading-screen svg path");
+
+// Scatter paths randomly at start
+paths.forEach(path => {
+  gsap.set(path, {
+    x: gsap.utils.random(-600, 600),
+    y: gsap.utils.random(-600, 600),
+    rotation: gsap.utils.random(-720, 720),
+    scale: gsap.utils.random(0.5, 1.5),
+    opacity: 0
+  });
+});
+
+// Animate paths into place smoothly
+paths.forEach((path, i) => {
+  gsap.to(path, {
+    x: 0,
+    y: 0,
+    rotation: 0,
+    scale: 1,
+    opacity: 1,
+    duration: gsap.utils.random(1.8, 2.5),
+    ease: "back.out(1.7)", // smooth fly-in with slight overshoot
+    delay: i * 0.015,
+    overwrite: true
+  });
+});
+
+// After all paths are in place, do a short shine/glow
+gsap.delayedCall(2.8, () => {
+  // brief glow effect
+  gsap.to("#loading-screen svg", {
+    filter: "drop-shadow(0 0 25px #8DB9E0) drop-shadow(0 0 50px #8DB9E0)",
+    duration: 0.8,
+    yoyo: true,
+    repeat: 1,
+    onComplete: () => {
+      // Fade out loading screen after glow
+      gsap.to(loadingScreen, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        onComplete: () => {
+          loadingScreen.style.display = "none";
+        }
+      });
+    }
+  });
+});
+</script>
+-->
+<header
+  id="header"
+  class="flex items-center justify-between px-4 sm:px-6 md:px-8 py-4 bg-gray-100 rounded-3xl shadow-lg transition-all duration-300"
+  style="z-index: 99999;"
+>
+  <!-- Logo -->
+  <div class="flex items-center flex-shrink-0">
+    <a href="#home">
+      <img src="images/Rebus Holdings Logo.png" alt="Rebus Holdings Logo" class="w-16 sm:w-16 md:w-16" />
+    </a>
+  </div>
+
+  <!-- Navigation -->
+  <div class="flex-1 flex justify-end ml-4 sm:ml-6 md:ml-8">
+    <nav
+      class="flex items-center space-x-4 sm:space-x-6 md:space-x-10 min-w-max"
+      id="main-nav"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
+      <a href="index.html" class="nav-link relative overflow-hidden pb-1 text-sm sm:text-base whitespace-nowrap hover:font-bold">
+        Home
+      </a>
+      <a href="services.html" class="nav-link relative overflow-hidden pb-1 text-sm sm:text-base whitespace-nowrap hover hover:font-bold">
+        Services
+      </a>
+      <a href="about.html" class="nav-link relative active overflow-hidden pb-1 text-sm sm:text-base whitespace-nowrap font-bold">
+        About Us
+      </a>
+      <a href="contact-us.html"
+        class="nav-button text-white px-4 py-2 sm:px-5 sm:py-2 rounded-full transform transition duration-300 text-sm sm:text-base whitespace-nowrap font-semibold">
+        Contact Us
+      </a>
+    </nav>
+  </div>
+
+<script>
+  const ACTIVE_COLOR = "#142850";
+  const INACTIVE_COLOR = "#888888";
+
+  const navLinks = document.querySelectorAll('#main-nav .nav-link');
+  const button = document.querySelector('#main-nav .nav-button');
+
+  navLinks.forEach(link => {
+    if (link.classList.contains('active')) {
+      gsap.set(link, { y: 0, color: ACTIVE_COLOR });
+      link.classList.add('underline-active');
+    } else {
+      gsap.set(link, { y: 0, color: INACTIVE_COLOR });
+    }
+
+    link.addEventListener('mouseenter', () => {
+      if (!link.classList.contains('active')) {
+        gsap.to(link, {
+          y: -6,
+          color: ACTIVE_COLOR,
+          duration: 0.3,
+          ease: "power3.out"
+        });
+        link.classList.add('underline-active');
+      }
+    });
+
+    link.addEventListener('mouseleave', () => {
+      if (!link.classList.contains('active')) {
+        gsap.to(link, {
+          y: 0,
+          color: INACTIVE_COLOR,
+          duration: 0.3,
+          ease: "power3.in"
+        });
+        link.classList.remove('underline-active');
+      }
+    });
+  });
+
+  // Set initial button color and scale
+  gsap.set(button, { backgroundColor: ACTIVE_COLOR, scale: 1 });
+
+  button.addEventListener('mouseenter', () => {
+    gsap.to(button, {
+      scale: 1.07,
+      duration: 0.35,
+      ease: "power3.out"
+    });
+  });
+
+  button.addEventListener('mouseleave', () => {
+    gsap.to(button, {
+      scale: 1,
+      duration: 0.35,
+      ease: "power3.in"
+    });
+  });
+</script>
+
+<style>
+  .nav-link {
+    position: relative;
+    cursor: pointer;
+    color: #888888; /* Visible muted gray */
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #142850; /* Active underline color */
+    transition: width 0.3s ease;
+  }
+
+  .nav-link.underline-active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: #142850 !important;
+  }
+
+  .nav-button {
+    background-color: #142850;
+    color: white;
+    cursor: pointer;
+  }
+
+  .nav-button:hover {
+    background-color: #142850; /* No color change on hover */
+  }
+</style>
+
+</header>
+
+  <div id="nav-container" class="fixed bottom-6 right-6 flex flex-col items-center gap-3 z-50" aria-label="Navigation Menu">
+
+    <!-- Scroll Up Button -->
+    <button
+      id="scroll-up-btn"
+      aria-label="Scroll to top"
+      title="Scroll to top"
+      type="button"
+      class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md hover:bg-gray-200 transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="#425B7D" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 18-5-5-5 5m10-7-5-5-5 5"/>
+      </svg>
+    </button>
+
+    <!-- Nav Icon + Menu Container -->
+    <div id="nav-hover-container" class="relative flex flex-col items-center">
+
+      <!-- Nav Icon Button -->
+      <button
+        id="nav-icon-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        type="button"
+        title="Open navigation menu"
+        class="bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300 focus:outline-none active:scale-95"
+        style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"
+      >
+        <!-- Nav Icon SVG -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="50"
+          height="50"
+          fill="none"
+          viewBox="0 0 69 50"
+          class="transition-transform duration-500 ease-in-out"
+        >
+          <g clip-path="url(#a)">
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M5.836 42.24c-.548-1.208-1.398-2.012-1.91-1.792-.512.22-.483 1.388.065 2.597s1.398 2.013 1.91 1.792c.512-.22.483-1.387-.065-2.596Zm-3.281-4.287c-.26-1.195-.786-2.098-1.175-2.02-.382.086-.483 1.117-.224 2.32.26 1.202.786 2.098 1.175 2.02.39-.079.483-1.117.224-2.32Zm.617-5.641c-.144-1.316-.678-2.333-1.204-2.276-.526.057-.83 1.16-.692 2.475.144 1.316.677 2.334 1.204 2.277.526-.057.829-1.16.692-2.476Zm-2.739-5.51c-.238 0-.433.953-.433 2.134s.195 2.134.433 2.134c.237 0 .432-.953.432-2.134 0-1.18-.195-2.134-.432-2.134Zm13.747 3.565c-1.751.107-3.07 1.85-2.94 3.899.13 2.048 1.65 3.62 3.402 3.514 1.752-.107 3.072-1.85 2.942-3.899-.13-2.048-1.651-3.62-3.403-3.514Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M8.136 32.27c1.05 0 1.903-1.3 1.903-2.903s-.852-2.902-1.903-2.902c-1.052 0-1.904 1.3-1.904 2.902 0 1.603.852 2.902 1.904 2.902Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M8.375 15.272c-.872-.363-2.134.661-2.826 2.283-.692 1.622-.54 3.223.324 3.585.873.363 2.134-.661 2.827-2.283.692-1.622.54-3.222-.325-3.585Zm4.395 2.482c-1.442-.405-3.064.797-3.612 2.69-.548 1.891.18 3.755 1.622 4.16 1.442.406 3.064-.796 3.612-2.688.548-1.892-.18-3.756-1.622-4.162Zm6.353 3.578c-1.925-.249-3.72 1.352-4.016 3.571-.295 2.22 1.024 4.226 2.949 4.468 1.925.248 3.72-1.352 4.016-3.572.295-2.219-1.024-4.225-2.95-4.467Zm-.283-10.917c-1.068-.946-3.022-.505-4.37.975-1.348 1.48-1.572 3.45-.512 4.389 1.067.946 3.021.505 4.37-.975 1.347-1.48 1.57-3.45.511-4.389Zm7.919 2.909c-1.406-1.351-3.872-1.117-5.494.534-1.622 1.65-1.803 4.075-.39 5.434 1.406 1.352 3.872 1.117 5.494-.533 1.622-1.65 1.803-4.076.39-5.435Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M27.424 34.313c2.246 0 4.066-1.834 4.066-4.097 0-2.263-1.82-4.097-4.066-4.097-2.246 0-4.066 1.834-4.066 4.097 0 2.263 1.82 4.097 4.066 4.097Zm5.276-9.558c2.197 0 3.98-1.72 3.98-3.842 0-2.121-1.782-3.84-3.98-3.84s-3.98 1.719-3.98 3.84c0 2.122 1.782 3.841 3.98 3.841Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M24.603 4.382c-.663-1.046-2.516-1.074-4.145-.071-1.622 1.003-2.4 2.667-1.738 3.713.664 1.046 2.517 1.074 4.146.071 1.622-1.003 2.4-2.667 1.737-3.713Zm9.227-3.361c-1.767 0-3.201.84-3.201 1.878 0 1.038 1.434 1.878 3.2 1.878 1.767 0 3.202-.84 3.202-1.878 0-1.039-1.435-1.878-3.201-1.878Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M37.81 16.046c2.247 0 4.067-1.567 4.067-3.5s-1.82-3.5-4.066-3.5c-2.246 0-4.066 1.567-4.066 3.5s1.82 3.5 4.066 3.5Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M51.609 8.625c-1.622-1.273-3.64-1.43-4.499-.363-.858 1.074-.238 2.966 1.384 4.24 1.623 1.273 3.641 1.43 4.5.362.857-1.074.237-2.966-1.385-4.24Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M42.217 30.05c2.197 0 3.98-1.796 3.98-4.012 0-2.216-1.783-4.012-3.98-4.012-2.198 0-3.98 1.796-3.98 4.012 0 2.216 1.782 4.012 3.98 4.012Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M51.15 27.49c-1.86-.093-3.46 1.508-3.568 3.578-.108 2.07 1.312 3.827 3.172 3.926 1.86.093 3.461-1.508 3.57-3.578.107-2.07-1.313-3.827-3.173-3.926Zm3.26-8.88c-1.327.057-2.329 1.785-2.228 3.862.094 2.07 1.247 3.706 2.574 3.642 1.327-.056 2.329-1.785 2.228-3.862-.094-2.07-1.248-3.706-2.574-3.642Zm9.98 1.576c-.526-1.75-1.672-2.96-2.559-2.696-.886.263-1.175 1.892-.649 3.635.527 1.75 1.673 2.959 2.56 2.696.887-.264 1.175-1.892.649-3.635Zm2.967 4.849c-.238-1.672-.894-2.966-1.471-2.88-.577.078-.858 1.5-.62 3.172.238 1.671.894 2.966 1.47 2.88.577-.078.858-1.5.62-3.172Zm-4.035 2.405c-.151-2.006-1.326-3.55-2.61-3.457-1.283.093-2.206 1.8-2.047 3.806.151 2.006 1.326 3.55 2.61 3.457 1.283-.093 2.206-1.8 2.047-3.806ZM4.694 22.732c-.8-.15-1.68.946-1.96 2.447-.282 1.501.136 2.831.936 2.98.8.15 1.68-.945 1.961-2.447.282-1.5-.137-2.83-.937-2.98Zm62.966 9.294c-.483-.078-1.089 1.145-1.348 2.724-.26 1.587-.08 2.931.404 3.01.483.078 1.088-1.146 1.348-2.725.26-1.586.08-2.93-.404-3.01Zm-9.052-.176c-1.478-.306-3.035 1.145-3.475 3.237-.44 2.09.397 4.033 1.875 4.339 1.478.306 3.035-1.145 3.475-3.237.44-2.091-.397-4.033-1.875-4.339Zm-47.43 15.002c-.93-1.195-2.178-1.792-2.783-1.33-.606.463-.34 1.8.59 2.995.93 1.195 2.178 1.792 2.784 1.33.605-.462.339-1.8-.591-2.995ZM7.306 36.394c-.374-1.437-1.362-2.425-2.191-2.212-.83.213-1.197 1.565-.822 3.002.375 1.437 1.362 2.425 2.192 2.212.829-.22 1.196-1.565.821-3.002ZM50.511 15.8c-1.11-1.843-3.59-2.654-5.544-1.815-1.954.84-2.639 3.024-1.529 4.866 1.11 1.842 3.59 2.653 5.545 1.814 1.953-.84 2.638-3.023 1.528-4.866Zm8.077-2.353c-1.391-1.473-3.129-1.693-3.886-.491-.75 1.195-.23 3.357 1.161 4.83 1.392 1.472 3.13 1.693 3.886.49.75-1.195.23-3.357-1.16-4.83ZM64.98 28.17c-.859-.022-1.601 1.444-1.652 3.286-.05 1.835.606 3.35 1.464 3.372.858.021 1.6-1.444 1.65-3.287.051-1.835-.605-3.35-1.463-3.371ZM33.313 7.211c-.447-1.529-2.595-2.183-4.794-1.45-2.2.732-3.627 2.567-3.18 4.097.447 1.529 2.596 2.183 4.795 1.45 2.199-.732 3.626-2.567 3.18-4.097ZM42.52 3.66c-1.68-.59-3.338-.064-3.699 1.174-.36 1.23.714 2.71 2.401 3.3 1.68.59 3.338.064 3.699-1.173.36-1.23-.714-2.71-2.401-3.3ZM45.656.372c-1.485-.605-2.985-.455-3.36.327-.367.783.534 1.906 2.019 2.511 1.485.605 2.985.455 3.36-.327.367-.783-.534-1.907-2.019-2.511ZM13.263 8.546c-.548-.52-1.896.163-3.014 1.529-1.117 1.366-1.572 2.888-1.024 3.407.548.52 1.896-.163 3.014-1.529 1.117-1.366 1.572-2.888 1.024-3.407ZM2.465 20.223c-.418-.107-1.045.917-1.398 2.29-.36 1.373-.31 2.568.108 2.675.418.106 1.045-.918 1.398-2.29.36-1.374.31-2.569-.108-2.675Zm3.008-6.171c-.44-.285-1.24.469-1.788 1.693-.548 1.223-.628 2.447-.188 2.731.44.285 1.24-.47 1.788-1.693.548-1.224.627-2.447.188-2.732Z" clip-rule="evenodd"/>
+          </g>
+          <defs>
+            <clipPath id="a">
+              <path fill="#fff" d="M0 0h68.182v50H0z"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </button>
+
+      <!-- Nav Menu -->
+      <nav
+        id="nav-menu"
+        class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 space-y-4 opacity-0 pointer-events-none transform translate-y-4 transition-all duration-300"
+        style="width: 180px;"
+      >
+        <a href="index.html" class="block font-semibold hover:underline" style="color: #142850;">Home</a>
+        <a href="services.html" class="block font-semibold hover:underline" style="color: #142850;">Services</a>
+        <a href="about.html" class="block font-semibold hover:underline" style="color: #142850;">About Us</a>
+      </nav>
+    </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navMenu = document.getElementById('nav-menu');
+    const navBtn = document.getElementById('nav-icon-btn');
+
+    let isOpen = false;
+
+    // Set initial state: hidden, scaled down from top right (near button)
+    gsap.set(navMenu, {
+      opacity: 0,
+      scale: 0.8,
+      y: 10,
+      transformOrigin: "top right",
+      pointerEvents: "none"
+    });
+
+    function openNavMenu() {
+      gsap.to(navMenu, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.35,
+        ease: "back.out(1.6)",
+        pointerEvents: "auto",
+        onStart: () => {
+          navMenu.style.pointerEvents = "auto";
+        }
+      });
+      navBtn.setAttribute('aria-expanded', 'true');
+      isOpen = true;
+    }
+
+    function closeNavMenu() {
+      gsap.to(navMenu, {
+        opacity: 0,
+        scale: 0.8,
+        y: 10,
+        duration: 0.25,
+        ease: "power2.in",
+        onComplete: () => {
+          navMenu.style.pointerEvents = "none";
+        }
+      });
+      navBtn.setAttribute('aria-expanded', 'false');
+      isOpen = false;
+    }
+
+    // Toggle nav on button click
+    navBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent immediate close when clicking button
+      if (isOpen) {
+        closeNavMenu();
+      } else {
+        openNavMenu();
+      }
+    });
+
+    // Close nav if user scrolls
+    window.addEventListener('scroll', () => {
+      if (isOpen) {
+        closeNavMenu();
+      }
+    });
+
+    // Close nav if clicking outside menu
+    document.addEventListener('click', (e) => {
+      if (isOpen && !navMenu.contains(e.target) && !navBtn.contains(e.target)) {
+        closeNavMenu();
+      }
+    });
+
+    // Close nav if pressing ESC
+    document.addEventListener('keydown', (e) => {
+      if (isOpen && e.key === "Escape") {
+        closeNavMenu();
+      }
+    });
+  });
+</script>
+
+<!--About us====================================================================================================================================-->
+
+<section id="about-hero" class="relative overflow-hidden antialiased text-slate-800">
+  <style>
+    .glass {
+      backdrop-filter: blur(6px) saturate(120%);
+      -webkit-backdrop-filter: blur(6px) saturate(120%);
+    }
+    .ceo-photo {
+      border: 6px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 30px rgba(18, 37, 90, 0.12);
+    }
+  </style>
+
+  <!-- Background SVG -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1">
+          <stop offset="0" stop-color="#E6EEF9" />
+          <stop offset="1" stop-color="#F9F7FF" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <!-- Left -->
+      <div class="relative">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 mb-6" id="hero-title">Inventing for customers, every day.</h1>
+        <div class="flex gap-3 items-center mt-6">
+          <a href="#timeline" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-slate-900 text-white font-medium shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-slate-300" id="learn-more">See Our Timeline</a>
+        </div>
+        <div class="mt-8 grid grid-cols-3 gap-4 max-w-sm text-center" id="hero-stats">
+           <div class="stat">
+            <div class="text-2xl font-bold"><span class="num" data-target="29">0</span></div>
+            <div class="text-xs text-slate-500">Years of Experience</div>
+          </div>
+          <div class="stats flex gap-12">
+            <div class="stat">
+              <div class="text-2xl font-bold">
+                <span class="num" data-target="100">0</span><span class="symbol">+</span>
+              </div>
+              <div class="text-xs text-slate-500">Projects</div>
+            </div>
+            <div class="stat">
+              <div class="text-2xl font-bold">
+                <span class="num" data-target="100">0</span><span class="symbol">%</span>
+              </div>
+              <div class="text-xs text-slate-500">On-Time Delivery</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right (CEO Card) -->
+      <aside class="flex items-center justify-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+        <div 
+          class="w-full max-w-2xl bg-white rounded-3xl p-10 lg:p-14 ceo-photo transform-gpu cursor-pointer shadow-lg"
+          id="ceo-card"
+        >
+          <div class="flex items-center gap-7">
+            <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 shadow-lg bg-white flex items-center justify-center">
+              <img src="images/francis-christy-boy-ceo.png" alt="CEO photo" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <div class="text-2xl font-bold">Francis Christy Boy</div>
+              <div class="text-lg text-slate-500">Chief Executive Officer</div>
+              <div class="text-lg text-slate-500">Rebus Holdings</div>
+            </div>
+          </div>
+
+          <!-- Original description -->
+          <blockquote class="mt-7 text-lg leading-relaxed text-slate-700 original-description">
+            Francis Christy Boy is a visionary executive with over 30 years of experience in engineering, construction, project management, and construction software development across the UAE and GCC. Starting his entrepreneurial path in 1992, Francis first founded an education and technology venture before establishing Engineering & Contracting in 1997.
+          </blockquote>
+          <div class="mt-8 text-base text-slate-500">
+            Founded in 1996 — Today we serve a handful of customers with a broad range of products and services that power shopping, business, and cloud computing.
+          </div>
+
+          <!-- Extra description hidden initially -->
+          <div class="mt-6 text-base text-slate-700 extra-description hidden space-y-4">
+            <p>Francis has played a pivotal role in executing most of the UAE’s iconic projects, which include:</p>
+            <ul class="list-disc list-inside mt-2 mb-4">
+              <li>Dubai International Airport</li>
+              <li>Zayed International Airports</li>
+              <li>The Dubai Mall</li>
+              <li>Abu Dhabi World Trade Centre</li>
+              <li>Barakah Nuclear Power Plant</li>
+              <li>Emirates Towers</li>
+              <li>ADNOC projects in Ruwais, UAE</li>
+              <li>Etisalat Towers</li>
+            </ul>
+
+            <p>Building upon this track record, Francis incorporated Rebus Project Management, UAE in 2016 to specialize in project closeout and consultancy, Rebus Project Management, UK in 2023, Rebus Information Technology Company, KSA in 2024, Rebus Technology Solutions LLC, UAE in 2025 and Rebus Holdings Company LLC in 2025 focusing on next-generation services, software and solutions for construction management.</p>
+
+            <p>A pivotal achievement in Francis’s career is the creation of <strong>CloseoutSoft</strong>, an internally developed construction management solution crafted to streamline and optimize project closeout processes and operational readiness. Introduced over nine years ago using Dot Net technology, this software has been central to Rebus’s ability to deliver projects with 100% on-time completion. In February 2025, Francis embarked on a major redevelopment of CloseoutSoft utilizing a modern technology stack, significantly enhancing its scalability and flexibility. This upgraded platform is designed to support businesses ranging from small teams to enterprises with over 100,000 users. Scheduled for completion by November 2025, the next-generation CloseOutSoft is set to empower both Rebus’s existing clients and other companies with advanced, comprehensive construction management capabilities.</p>
+
+            <p>Deeply grateful for the UAE’s role in his professional journey, Francis is dedicated to giving back by revolutionizing project delivery through innovative, accessible technology. Guided by the tagline, “We complete the incomplete,” Francis leads Rebus Holdings in setting new standards for construction management and closeout solutions in the region.</p>
+          </div>
+        </div>
+      </aside>
+
+      <div id="ceo-modal-overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+<!-- Modal CEO -->
+
+<script>
+const ceoAside = document.querySelector('aside.flex');
+
+ceoAside.addEventListener('mouseenter', () => {
+  gsap.to(ceoAside, { scale: 1.02, boxShadow: '0 20px 40px rgba(0,0,0,0.1)', duration: 0.3 });
+});
+
+ceoAside.addEventListener('mouseleave', () => {
+  gsap.to(ceoAside, { scale: 1, boxShadow: '0 0 0 rgba(0,0,0,0)', duration: 0.3 });
+});
+const ceoCard = document.getElementById('ceo-card');
+const modalOverlay = document.getElementById('ceo-modal-overlay');
+let cardClone;
+let closeBtn;
+
+// Close modal function
+function closeModal() {
+  if (!cardClone) return;
+
+  const rect = ceoCard.getBoundingClientRect();
+
+  gsap.to(cardClone, {
+    duration: 0.6,
+    top: rect.top,
+    left: rect.left,
+    scale: 1,
+    ease: 'power3.in',
+    onComplete: () => {
+      cardClone.remove();
+      cardClone = null;
+      if (closeBtn) closeBtn.remove();
+    }
+  });
+
+  gsap.to(modalOverlay, {
+    duration: 0.3,
+    autoAlpha: 0,
+    onComplete: () => {
+      modalOverlay.style.display = 'none';
+    }
+  });
+}
+
+// Open modal animation
+ceoCard.addEventListener('click', () => {
+  const rect = ceoCard.getBoundingClientRect();
+
+  cardClone = ceoCard.cloneNode(true);
+  cardClone.style.position = 'fixed';
+  cardClone.style.top = rect.top + 'px';
+  cardClone.style.left = rect.left + 'px';
+  cardClone.style.width = '600px'; 
+  cardClone.style.height = rect.height + 'px';
+  cardClone.style.margin = 0;
+  cardClone.style.zIndex = 50;
+  cardClone.style.borderRadius = '1rem';
+  cardClone.style.overflowY = 'auto';      // allow vertical scroll
+  cardClone.style.maxHeight = '90vh';      // prevent it from going off screen
+  cardClone.style.padding = '2rem';        // optional padding
+  cardClone.style.boxShadow = '0 10px 40px rgba(0,0,0,0.3)';
+  cardClone.style.backgroundColor = 'white';
+
+  document.body.appendChild(cardClone);
+
+  // Select elements inside the clone
+  const extra = cardClone.querySelector('.extra-description');
+  const oldDesc1 = cardClone.querySelector('.original-description');
+  const oldDesc2 = cardClone.querySelector('.original-summary');
+
+  // Hide old, show extra later
+  if(oldDesc1) oldDesc1.style.display = 'none';
+  if(oldDesc2) oldDesc2.style.display = 'none';
+  if(extra) extra.style.display = 'none';
+
+ // Create a close button
+  closeBtn = document.createElement('button');
+  closeBtn.textContent = '×';
+  closeBtn.style.position = 'absolute';
+  closeBtn.style.top = '1rem';
+  closeBtn.style.right = '1rem';
+  closeBtn.style.fontSize = '2rem';
+  closeBtn.style.background = 'transparent';
+  closeBtn.style.border = 'none';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.style.zIndex = '60';
+  closeBtn.style.opacity = '0';     // start invisible
+  closeBtn.style.transform = 'scale(0.5)'; // start smaller
+  cardClone.appendChild(closeBtn);
+
+  // Animate the close button in
+  gsap.to(closeBtn, {
+    duration: 0.5,
+    autoAlpha: 1,  // fade in
+    scale: 1,       // scale to normal
+    ease: 'back.out(1.7)'
+  });
+
+  // Optional: hover effect
+  closeBtn.addEventListener('mouseenter', () => {
+    gsap.to(closeBtn, { scale: 1.3, duration: 0.2, ease: 'power1.out' });
+  });
+  closeBtn.addEventListener('mouseleave', () => {
+    gsap.to(closeBtn, { scale: 1, duration: 0.2, ease: 'power1.out' });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  // Show overlay
+  gsap.set(modalOverlay, { autoAlpha: 0, display: 'block' });
+  gsap.to(modalOverlay, { duration: 0.3, autoAlpha: 1 });
+
+  // Animate clone to center
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  gsap.to(cardClone, {
+    duration: 0.6,
+    top: vh / 2 - rect.height / 2,
+    left: vw / 2 - rect.width / 2,
+    scale: 1.2,
+    ease: 'power3.out',
+    onComplete: () => {
+      if(extra) {
+        extra.style.display = 'block';
+        gsap.from(extra, { duration: 0.5, autoAlpha: 0, y: 20, ease: "power3.out" });
+      }
+    }
+  });
+});
+
+// Close on overlay click
+modalOverlay.addEventListener('click', closeModal);
+
+// Close on scroll
+window.addEventListener('scroll', () => {
+  if (cardClone) closeModal();
+});
+
+// Close on ESC key
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && cardClone) {
+    closeModal();
+  }
+});
+</script>
+
+<!-- GSAP Animations -->
+
+<script>
+const mainBtn = document.getElementById("learn-more");
+const linkBtn = document.querySelector(".text-slate-600.hover\\:underline");
+
+// Animate main button hover
+mainBtn.addEventListener("mouseenter", () => {
+  gsap.to(mainBtn, {
+    scale: 1.03,
+    backgroundColor: "#142850", // slightly darker
+    boxShadow: "0 8px 20px rgba(20,40,80,0.3)",
+    color: "#ffffff",
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+mainBtn.addEventListener("mouseleave", () => {
+  gsap.to(mainBtn, {
+    scale: 1,
+    backgroundColor: "#1e293b", // original slate-900
+    boxShadow: "0 0 0 rgba(0,0,0,0)",
+    color: "#ffffff",
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+// Animate link hover with underline slide
+linkBtn.addEventListener("mouseenter", () => {
+  gsap.to(linkBtn, {
+    color: "#142850",
+    textDecoration: "underline",
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+linkBtn.addEventListener("mouseleave", () => {
+  gsap.to(linkBtn, {
+    color: "#475569", // original text-slate-600
+    textDecoration: "none",
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+</script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Animate CEO card on scroll into view
+gsap.from("#ceo-card", {
+  y: 60,            // start 60px below
+  opacity: 0,       // start invisible
+  scale: 0.95,      // slightly smaller
+  duration: 1,      // animation duration
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: "#ceo-card",   // element that triggers animation
+    start: "top 80%",       // when top of element hits 80% of viewport
+    toggleActions: "play none none none" // play once
+  }
+});
+</script>
+
+<script>
+  // === Hero animations ===
+  const tl = gsap.timeline({ defaults: { duration: 0.9, ease: "power3.out" } });
+
+  // Animate title and buttons
+  tl.from('#hero-title', { y: 30, opacity: 0 })
+    .from('#learn-more', { scale: 0.95, opacity: 0 }, "-=0.6")
+    .from('a.text-slate-600.hover\\:underline', { y: 15, opacity: 0 }, "-=0.6");
+
+  // Animate stats numbers and symbols immediately, in parallel
+  const stats = document.querySelectorAll('.stat');
+
+  stats.forEach(stat => {
+    const numEl = stat.querySelector('.num');
+    const symbolEl = stat.querySelector('.symbol');
+    const target = +numEl.getAttribute('data-target');
+
+    // Animate number
+    gsap.fromTo(numEl,
+      { innerText: 0 },
+      { 
+        innerText: target,
+        duration: 2,
+        ease: "power1.out",
+        snap: { innerText: 1 },
+        onUpdate: () => numEl.innerText = Math.floor(numEl.innerText)
+      }
+    );
+
+    // Animate symbol
+    gsap.fromTo(symbolEl,
+      { scale: 0, y: -10, opacity: 0 },
+      { scale: 1, y: 0, opacity: 1, duration: 0.6, ease: "elastic.out(1,0.5)" }
+    );
+  });
+
+  // Play timeline immediately
+  tl.play();
+</script>
+</section>
+
+<!-- Timeline ================================================================================================================================-->
+<style>
+.timeline-item {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .testimonial-card {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #142850 0%, #1e3a8a 100%);
+    }
+    
+    .glass-effect {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    .animate-scroll {
+      animation: scroll 30s linear infinite;
+    }
+    
+    .animate-scroll:hover {
+      animation-play-state: paused;
+    }
+
+    .animate-testimonials {
+      animation: scroll 40s linear infinite;
+    }
+    
+    .animate-testimonials:hover {
+      animation-play-state: paused;
+    }
+
+    .logo-loop-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Left and right fade effects */
+    .logo-loop-container::before,
+    .logo-loop-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .logo-loop-container::before {
+      left: 0;
+      background: linear-gradient(to right, #f9fafb, transparent);
+    }
+
+    .logo-loop-container::after {
+      right: 0;
+      background: linear-gradient(to left, #f9fafb, transparent);
+    }
+
+    /* White background fade for testimonials section */
+    .testimonials-fade::before {
+      background: linear-gradient(to right, white, transparent);
+    }
+
+    .testimonials-fade::after {
+      background: linear-gradient(to left, white, transparent);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Timeline Section -->
+<section id="timeline" class="relative py-16 bg-gray-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">Our Journey</h2>
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto">Three decades of excellence in engineering, construction, and innovation across the UAE and GCC region</p>
+    </div>
+  </div>
+
+  <!-- Full width infinite scrolling picture loop -->
+  <div class="logo-loop-container relative overflow-hidden w-full">
+    <div class="flex space-x-8 animate-scroll">
+        <!-- First set of images -->
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" alt="Modern office building" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Emirates Towers</h3>
+            <p class="text-sm text-gray-200">Iconic twin towers in Dubai's financial district</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop" alt="Construction site" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Barakah Nuclear Plant</h3>
+            <p class="text-sm text-gray-200">UAE's first nuclear power facility</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop" alt="Dubai skyline" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Dubai International Airport</h3>
+            <p class="text-sm text-gray-200">World's busiest international airport</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Architecture" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">The Dubai Mall</h3>
+            <p class="text-sm text-gray-200">World's largest shopping destination</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop" alt="Modern interior" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Zayed International Airport</h3>
+            <p class="text-sm text-gray-200">Abu Dhabi's premier aviation hub</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=300&fit=crop" alt="Office complex" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Abu Dhabi World Trade Centre</h3>
+            <p class="text-sm text-gray-200">Premier business and exhibition venue</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="Telecommunications tower" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Etisalat Towers</h3>
+            <p class="text-sm text-gray-200">Leading telecommunications headquarters</p>
+          </div>
+        </div>
+        
+        <!-- Duplicate set for seamless loop -->
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" alt="Modern office building" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Emirates Towers</h3>
+            <p class="text-sm text-gray-200">Iconic twin towers in Dubai's financial district</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop" alt="Construction site" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Barakah Nuclear Plant</h3>
+            <p class="text-sm text-gray-200">UAE's first nuclear power facility</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop" alt="Dubai skyline" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Dubai International Airport</h3>
+            <p class="text-sm text-gray-200">World's busiest international airport</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Architecture" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">The Dubai Mall</h3>
+            <p class="text-sm text-gray-200">World's largest shopping destination</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop" alt="Modern interior" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Zayed International Airport</h3>
+            <p class="text-sm text-gray-200">Abu Dhabi's premier aviation hub</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=300&fit=crop" alt="Office complex" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Abu Dhabi World Trade Centre</h3>
+            <p class="text-sm text-gray-200">Premier business and exhibition venue</p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 w-80 h-60 overflow-hidden relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="Telecommunications tower" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h3 class="text-xl font-bold mb-2">Etisalat Towers</h3>
+            <p class="text-sm text-gray-200">Leading telecommunications headquarters</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonies Section -->
+<section class="py-20 bg-white relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">What Our Team Says</h2>
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto">Hear from the professionals who make excellence possible every day</p>
+    </div>
+  </div>
+
+  <!-- Full width infinite testimonials loop -->
+  <div class="logo-loop-container testimonials-fade relative overflow-hidden w-full">
+    <div class="flex space-x-6 animate-testimonials">
+        <!-- First set of testimonials -->
+        <!-- Testimonial 1 -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">SM</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Working at Rebus has been transformative. The company's commitment to excellence and innovation in project management is unmatched."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Sarah Mitchell</div>
+                <div class="text-xs text-slate-500">Senior Project Manager</div>
+                <div class="text-xs text-slate-400 mt-1">Dubai Operations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">AK</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "The technical expertise and collaborative culture at Rebus creates an environment where innovation thrives. Francis's vision inspires us all."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Ahmed Khalil</div>
+                <div class="text-xs text-slate-500">Lead Software Engineer</div>
+                <div class="text-xs text-slate-400 mt-1">Technology Division</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">LJ</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Rebus doesn't just complete projects—we transform them. Our closeout processes and CloseoutSoft have revolutionized client value delivery."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Lisa Johnson</div>
+                <div class="text-xs text-slate-500">Operations Director</div>
+                <div class="text-xs text-slate-400 mt-1">Abu Dhabi Office</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">MR</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "The international expansion opportunities and cutting-edge technology at Rebus keep me motivated. We're setting trends in construction management."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Michael Roberts</div>
+                <div class="text-xs text-slate-500">International Projects Lead</div>
+                <div class="text-xs text-slate-400 mt-1">UK Operations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">FA</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Working on iconic projects like Dubai Mall and Abu Dhabi airports through Rebus has been the highlight of my career. Excellence is evident everywhere."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Fatima Al-Zahra</div>
+                <div class="text-xs text-slate-500">Quality Assurance Manager</div>
+                <div class="text-xs text-slate-400 mt-1">Project Excellence Team</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-violet-400 to-purple-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">JC</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Francis's leadership and vision for construction technology inspire us daily. Being part of the CloseoutSoft evolution is building tomorrow's standards."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">James Chen</div>
+                <div class="text-xs text-slate-500">Product Development Manager</div>
+                <div class="text-xs text-slate-400 mt-1">CloseoutSoft Team</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duplicate set for seamless loop -->
+        <!-- Testimonial 1 (duplicate) -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">SM</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Working at Rebus has been transformative. The company's commitment to excellence and innovation in project management is unmatched."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Sarah Mitchell</div>
+                <div class="text-xs text-slate-500">Senior Project Manager</div>
+                <div class="text-xs text-slate-400 mt-1">Dubai Operations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 (duplicate) -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">AK</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "The technical expertise and collaborative culture at Rebus creates an environment where innovation thrives. Francis's vision inspires us all."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Ahmed Khalil</div>
+                <div class="text-xs text-slate-500">Lead Software Engineer</div>
+                <div class="text-xs text-slate-400 mt-1">Technology Division</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 (duplicate) -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">LJ</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Rebus doesn't just complete projects—we transform them. Our closeout processes and CloseoutSoft have revolutionized client value delivery."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Lisa Johnson</div>
+                <div class="text-xs text-slate-500">Operations Director</div>
+                <div class="text-xs text-slate-400 mt-1">Abu Dhabi Office</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 (duplicate) -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">MR</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "The international expansion opportunities and cutting-edge technology at Rebus keep me motivated. We're setting trends in construction management."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Michael Roberts</div>
+                <div class="text-xs text-slate-500">International Projects Lead</div>
+                <div class="text-xs text-slate-400 mt-1">UK Operations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 (duplicate) -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">FA</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Working on iconic projects like Dubai Mall and Abu Dhabi airports through Rebus has been the highlight of my career. Excellence is evident everywhere."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">Fatima Al-Zahra</div>
+                <div class="text-xs text-slate-500">Quality Assurance Manager</div>
+                <div class="text-xs text-slate-400 mt-1">Project Excellence Team</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 (duplicate) -->
+        <div class="flex-shrink-0 w-80 testimonial-card group cursor-pointer">
+          <div class="p-6 h-full relative overflow-hidden transition-all duration-300">
+            <div class="absolute top-4 right-6 text-4xl text-blue-200 font-serif">"</div>
+            
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-violet-400 to-purple-500 rounded-full flex items-center justify-center mb-4">
+                <span class="text-white font-bold text-sm">JC</span>
+              </div>
+              
+              <blockquote class="text-gray-700 mb-4 leading-relaxed italic text-sm">
+                "Francis's leadership and vision for construction technology inspire us daily. Being part of the CloseoutSoft evolution is building tomorrow's standards."
+              </blockquote>
+              
+              <div class="border-t border-gray-200 pt-3">
+                <div class="font-semibold text-slate-900 mb-1 text-sm">James Chen</div>
+                <div class="text-xs text-slate-500">Product Development Manager</div>
+                <div class="text-xs text-slate-400 mt-1">CloseoutSoft Team</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Testimonial cards animation
+gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
+  gsap.fromTo(card, 
+    { 
+      opacity: 0, 
+      y: 60,
+      scale: 0.9,
+      rotateY: 15
+    },
+    { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      rotateY: 0,
+      duration: 0.8,
+      delay: i * 0.1,
+      ease: "back.out(1.3)",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      }
+    }
+  );
+});
+
+// Hover effects for testimonial cards
+gsap.utils.toArray('.testimonial-card').forEach(card => {
+  const cardEl = card.querySelector('div');
+  
+  card.addEventListener('mouseenter', () => {
+    gsap.to(cardEl, {
+      y: -8,
+      scale: 1.02,
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    gsap.to(cardEl, {
+      y: 0,
+      scale: 1,
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  });
+});
+</script>
+
+<!-- Footer ==================================================================================================================================-->
+
+<footer
+  id="footer"
+  class="relative text-white px-10 py-1 0 overflow-hidden font-sans"
+  style="background: linear-gradient(to right, #142850, #142850, #142850);"
+>
+
+  <!-- Animated glowing waves background -->
+  <div aria-hidden="true" class="animated-waves absolute inset-x-0 bottom-0 -z-10 overflow-hidden" style="height: 80px;">
+    <svg
+      id="wave1"
+      class="wave wave1"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style="position:absolute; bottom:0; width:150%; height:80px; left:-25%;"
+    >
+      <path
+        fill="rgba(30, 60, 120, 0.4)"
+        d="M0,160 C480,200 960,120 1440,160 L1440,320 L0,320 Z"
+      />
+    </svg>
+
+    <svg
+      id="wave2"
+      class="wave wave2"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style="position:absolute; bottom:0; width:150%; height:80px; left:-25%;"
+    >
+      <path
+        fill="rgba(60, 90, 160, 0.25)"
+        d="M0,180 C480,140 960,220 1440,180 L1440,320 L0,320 Z"
+      />
+    </svg>
+  </div>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-14 relative z-10">
+    <!-- About section -->
+    <div class="footer-section">
+      <h3 class="text-2xl font-extrabold mb-5 tracking-wide gradient-text">About Rebus @Official</h3>
+      <p class="leading-relaxed text-lg max-w-md">Rebus turns unfinished projects into success. With decades of UAE experience in construction, fit-out, and project management, we specialize in seamless project closeouts—transforming chaos into clarity. Our mission: to eliminate handover pain points using precision, process, and modern tools. From airports to towers and mega infrastructure, we don’t just build your vision—we complete it.</p>
+    </div>
+
+    <!-- Quick links -->
+    <div class="footer-section" style="color: #ffffff;">
+      <h3 class="text-2xl font-extrabold mb-5 tracking-wide gradient-text" style="color: #ffffff;">
+        Quick Links
+      </h3>
+      <ul class="space-y-4 text-lg">
+        <li><a href="index.html" class="footer-link" style="color: #ffffff;">Home</a></li>
+        <li><a href="services.html" class="footer-link" style="color: #fff;">Services</a></li>
+        <li><a href="index.html#project" class="footer-link" style="color: #ffffff;">Projects</a></li>
+        <li><a href="contact-us.html" class="footer-link" style="color: #ffffff;">Contact Us</a></li>
+        <li><a href="about.html" class="footer-link" style="color: #fff;">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="footer-section">
+      <h3 class="text-2xl font-extrabold mb-5 tracking-wide gradient-text">Connect With Us</h3>
+      <div class="flex space-x-8 mt-3 mb-6">
+        <!-- Social Icons -->
+        <a href="#" aria-label="Facebook" class="social-icon" target="_blank" rel="noopener noreferrer" title="Facebook">
+          <svg fill="currentColor" class="w-7 h-7 hover:text-blue-500 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.675 0h-21.35C.594 0 0 .594 0 1.326v21.348C0 23.405.594 24 1.325 24H12.82v-9.294H9.692V11.01h3.127V8.413c0-3.1 1.894-4.788 4.66-4.788 1.325 0 2.466.099 2.798.143v3.24l-1.922.001c-1.507 0-1.8.716-1.8 1.767v2.317h3.602l-.468 3.696h-3.134V24h6.138C23.406 24 24 23.406 24 22.674V1.326C24 .594 23.406 0 22.675 0z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="X (formerly Twitter)" class="social-icon" target="_blank" rel="noopener noreferrer" title="X">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14" class="w-7 h-7 hover:text-sky-400 transition-colors" aria-hidden="true">
+            <g clip-path="url(#a)">
+              <mask id="b" width="18" height="18" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:luminance">
+                <path fill="#fff" d="M0 0h14v14H0V0Z"/>
+              </mask>
+              <g mask="url(#b)">
+                <path fill="#fff" d="M11.025.656h2.147L8.482 6.03 14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71 11.025.656Zm-.755 11.4h1.19L3.78 1.877H2.504l7.766 10.179Z"/>
+              </g>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path fill="#fff" d="M0 0h14v14H0z"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <svg fill="currentColor" class="w-7 h-7 hover:text-pink-500 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 30 30">
+            <path fill="#fff" d="M23.75 3.75a2.5 2.5 0 0 1 2.5 2.5v17.5a2.5 2.5 0 0 1-2.5 2.5H6.25a2.5 2.5 0 0 1-2.5-2.5V6.25a2.5 2.5 0 0 1 2.5-2.5h17.5Zm-.625 19.375V16.5a4.075 4.075 0 0 0-4.075-4.075c-1.063 0-2.3.65-2.9 1.625v-1.388h-3.487v10.463h3.487v-6.163c0-.962.775-1.75 1.738-1.75a1.75 1.75 0 0 1 1.75 1.75v6.163h3.487ZM8.6 10.7a2.1 2.1 0 0 0 2.1-2.1 2.107 2.107 0 0 0-2.1-2.112A2.112 2.112 0 0 0 6.488 8.6c0 1.162.95 2.1 2.112 2.1Zm1.738 12.425V12.662H6.875v10.463h3.463Z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube" class="social-icon" target="_blank" rel="noopener noreferrer" title="YouTube">
+          <svg fill="currentColor" class="w-7 h-7 hover:text-red-600 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.498 6.186a2.983 2.983 0 00-2.097-2.1C19.424 3.5 12 3.5 12 3.5s-7.424 0-9.4.586a2.983 2.983 0 00-2.098 2.1A31.39 31.39 0 000 12a31.39 31.39 0 00.502 5.814 2.983 2.983 0 002.096 2.101c1.977.584 9.4.584 9.4.584s7.424 0 9.4-.584a2.983 2.983 0 002.098-2.1A31.39 31.39 0 0024 12a31.39 31.39 0 00-.502-5.814zM9.75 15.02V8.98l5.82 3.02-5.82 3.02z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="text-blue-200 text-sm max-w-md select-text">
+        <p><strong>Email:</strong> <a href="mailto:admin@rebus.ae" class="hover:underline text-white">admin@rebus.ae</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+971026729802" class="hover:underline text-white">+971 (02) 672 9802</a></p>
+        <p><strong>Address:</strong> PO Box: 3282, 12th Floor, Office No: 1203/1204,<br> Sultan International Tower, Corniche, Abu Dhabi, UAE</p>
+      </div>
+    </div>
+  </div>
+  <p class="mt-16 text-center tracking-wide text-sm select-none relative z-10 copyright-text">&copy; 2025 Rebus @Official. All rights reserved.</p>
+
+  <style>
+    /* Styles same as before */
+    .footer-section h3 {
+      margin-bottom: 1rem;     /* keep enough breathing room */
+      font-size: 1.5rem;       /* slightly smaller but still prominent */
+      line-height: 1.3;
+    }
+
+    .footer-section ul {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Connect With Us specific tweaks */
+    .footer-section:last-child {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;            /* less vertical space */
+    }
+
+    .footer-section:last-child .flex.space-x-8 {
+      gap: 1rem;               /* slightly tighter icon spacing */
+      margin-top: 0;
+      margin-bottom: 0.75rem;  /* reduce bottom margin */
+    }
+
+    .footer-section .text-blue-200 {
+      font-size: 0.875rem;
+      line-height: 1.4;
+      margin-top: 0;           /* remove unnecessary top margin */
+    }
+
+    /* Reduce overall footer padding */
+    #footer {
+      padding-top: 2rem;       /* 32px */
+      padding-bottom: 2rem;    /* 32px */
+      font-size: 1rem;
+    }
+
+    /* Optional: Reduce bottom copyright margin */
+    .copyright-text {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #a0a0a0;
+    }
+
+    .text-blue-200 {
+      font-size: 0.875rem;       /* keep small but readable */
+      line-height: 1.4;          /* decent line spacing */
+      max-width: 400px;          /* control width */
+      margin-top: 0;
+      margin-bottom: 0;
+      user-select: text;         /* allow text selection */
+      color: #a0c4ff;            /* softer blue tone */
+    }
+
+    .text-blue-200 strong {
+      font-weight: 600;          /* slightly bolder */
+      color: #e0e7ff;            /* lighter highlight color */
+    }
+
+    .text-blue-200 a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .text-blue-200 a:hover {
+      text-decoration: underline;
+      color: #90caf9;            /* lighter hover blue */
+    }
+    
+  </style>
+  <script>
+    // Wave path shapes to morph between
+    const wave1Start = "M0,160 C480,200 960,120 1440,160 L1440,320 L0,320 Z";
+    const wave1End =   "M0,140 C480,100 960,180 1440,140 L1440,320 L0,320 Z";
+
+    const wave2Start = "M0,180 C480,140 960,220 1440,180 L1440,320 L0,320 Z";
+    const wave2End =   "M0,200 C480,240 960,160 1440,200 L1440,320 L0,320 Z";
+
+    const wave1 = document.querySelector("#wave1 path");
+    const wave2 = document.querySelector("#wave2 path");
+
+    // Morph function with GSAP timelines
+    function morphWave(path, startShape, endShape, duration) {
+      return gsap.timeline({ repeat: -1, yoyo: true, defaults: { duration: duration, ease: "sine.inOut" } })
+        .to(path, { attr: { d: endShape } })
+        .to(path, { attr: { d: startShape } });
+    }
+
+    // Start morph animations
+    morphWave(wave1, wave1Start, wave1End, 20);
+    morphWave(wave2, wave2Start, wave2End, 25);
+
+    // Add horizontal floating animation for the whole SVGs
+    gsap.to("#wave1", {
+      x: 15,
+      duration: 20,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+    gsap.to("#wave2", {
+      x: -20,
+      duration: 25,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+  </script>
+</footer>
+
+</body>
+</html>

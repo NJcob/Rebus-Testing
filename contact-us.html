@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <style>
+    @font-face {
+      font-family: "Avenir Next LT Pro";
+      src: url("font/Avenir\ Next\ LT\ Pro\ Regular.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    html, body, * {
+      font-family: "Avenir Next LT Pro", sans-serif !important;
+    }
+    
+    .contact-form {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    
+    .contact-info {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    
+    .form-field {
+      transition: all 0.3s ease;
+    }
+    
+    .form-field:focus {
+      transform: translateY(-2px);
+    }
+    
+    .submit-btn {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      transition: all 0.4s ease;
+    }
+    
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    
+    .grid-background {
+      background-image: 
+        linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 0 0;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .modal-overlay.show .modal-content {
+      transform: translateY(0) scale(1);
+    }
+    
+    .modal-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .success-icon {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+    
+    .error-icon {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .modal-close:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<header
+  id="header"
+  class="flex items-center justify-between px-4 sm:px-6 md:px-8 py-4 bg-gray-100 rounded-3xl shadow-lg transition-all duration-300"
+  style="z-index: 99999;"
+>
+  <!-- Logo -->
+  <div class="flex items-center flex-shrink-0">
+    <a href="#home">
+      <img src="images/Rebus Holdings Logo.png" alt="Rebus Holdings Logo" class="w-16 sm:w-16 md:w-16" />
+    </a>
+  </div>
+
+  <!-- Navigation -->
+  <div class="flex-1 flex justify-end ml-4 sm:ml-6 md:ml-8">
+    <nav
+      class="flex items-center space-x-4 sm:space-x-6 md:space-x-10 min-w-max"
+      id="main-nav"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
+      <a href="index.html" class="nav-link relative overflow-hidden pb-1 text-sm sm:text-base whitespace-nowrap hover:font-bold">
+        Home
+      </a>
+      <a href="services.html" class="nav-link relative overflow-hidden pb-1 text-sm sm:text-base whitespace-nowrap hover hover:font-bold">
+        Services
+      </a>
+      <a href="about.html" class="nav-link relative overflow-hidden pb-1 text-sm sm:text-base whitespace-nowrap hover:font-bold">
+        About Us
+      </a>
+      <a href="contact-us.html"
+        class="nav-button text-white px-4 py-2 sm:px-5 sm:py-2 rounded-full transform transition duration-300 text-sm sm:text-base whitespace-nowrap font-semibold">
+        Contact Us
+      </a>
+    </nav>
+  </div>
+
+<script>
+  const ACTIVE_COLOR = "#142850";
+  const INACTIVE_COLOR = "#888888";
+
+  const navLinks = document.querySelectorAll('#main-nav .nav-link');
+  const button = document.querySelector('#main-nav .nav-button');
+
+  navLinks.forEach(link => {
+    if (link.classList.contains('active')) {
+      gsap.set(link, { y: 0, color: ACTIVE_COLOR });
+      link.classList.add('underline-active');
+    } else {
+      gsap.set(link, { y: 0, color: INACTIVE_COLOR });
+    }
+
+    link.addEventListener('mouseenter', () => {
+      if (!link.classList.contains('active')) {
+        gsap.to(link, {
+          y: -6,
+          color: ACTIVE_COLOR,
+          duration: 0.3,
+          ease: "power3.out"
+        });
+        link.classList.add('underline-active');
+      }
+    });
+
+    link.addEventListener('mouseleave', () => {
+      if (!link.classList.contains('active')) {
+        gsap.to(link, {
+          y: 0,
+          color: INACTIVE_COLOR,
+          duration: 0.3,
+          ease: "power3.in"
+        });
+        link.classList.remove('underline-active');
+      }
+    });
+  });
+
+  // Set initial button color and scale
+  gsap.set(button, { backgroundColor: ACTIVE_COLOR, scale: 1 });
+
+  button.addEventListener('mouseenter', () => {
+    gsap.to(button, {
+      scale: 1.07,
+      duration: 0.35,
+      ease: "power3.out"
+    });
+  });
+
+  button.addEventListener('mouseleave', () => {
+    gsap.to(button, {
+      scale: 1,
+      duration: 0.35,
+      ease: "power3.in"
+    });
+  });
+</script>
+
+<style>
+  .nav-link {
+    position: relative;
+    cursor: pointer;
+    color: #888888; /* Visible muted gray */
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #142850; /* Active underline color */
+    transition: width 0.3s ease;
+  }
+
+  .nav-link.underline-active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: #142850 !important;
+  }
+
+  .nav-button {
+    background-color: #142850;
+    color: white;
+    cursor: pointer;
+  }
+
+  .nav-button:hover {
+    background-color: #142850; /* No color change on hover */
+  }
+</style>
+
+</header>
+
+  <div id="nav-container" class="fixed bottom-6 right-6 flex flex-col items-center gap-3 z-50" aria-label="Navigation Menu">
+
+    <!-- Scroll Up Button -->
+    <button
+      id="scroll-up-btn"
+      aria-label="Scroll to top"
+      title="Scroll to top"
+      type="button"
+      class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md hover:bg-gray-200 transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="#425B7D" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 18-5-5-5 5m10-7-5-5-5 5"/>
+      </svg>
+    </button>
+
+    <!-- Nav Icon + Menu Container -->
+    <div id="nav-hover-container" class="relative flex flex-col items-center">
+
+      <!-- Nav Icon Button -->
+      <button
+        id="nav-icon-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        type="button"
+        title="Open navigation menu"
+        class="bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300 focus:outline-none active:scale-95"
+        style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"
+      >
+        <!-- Nav Icon SVG -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="50"
+          height="50"
+          fill="none"
+          viewBox="0 0 69 50"
+          class="transition-transform duration-500 ease-in-out"
+        >
+          <g clip-path="url(#a)">
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M5.836 42.24c-.548-1.208-1.398-2.012-1.91-1.792-.512.22-.483 1.388.065 2.597s1.398 2.013 1.91 1.792c.512-.22.483-1.387-.065-2.596Zm-3.281-4.287c-.26-1.195-.786-2.098-1.175-2.02-.382.086-.483 1.117-.224 2.32.26 1.202.786 2.098 1.175 2.02.39-.079.483-1.117.224-2.32Zm.617-5.641c-.144-1.316-.678-2.333-1.204-2.276-.526.057-.83 1.16-.692 2.475.144 1.316.677 2.334 1.204 2.277.526-.057.829-1.16.692-2.476Zm-2.739-5.51c-.238 0-.433.953-.433 2.134s.195 2.134.433 2.134c.237 0 .432-.953.432-2.134 0-1.18-.195-2.134-.432-2.134Zm13.747 3.565c-1.751.107-3.07 1.85-2.94 3.899.13 2.048 1.65 3.62 3.402 3.514 1.752-.107 3.072-1.85 2.942-3.899-.13-2.048-1.651-3.62-3.403-3.514Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M8.136 32.27c1.05 0 1.903-1.3 1.903-2.903s-.852-2.902-1.903-2.902c-1.052 0-1.904 1.3-1.904 2.902 0 1.603.852 2.902 1.904 2.902Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M8.375 15.272c-.872-.363-2.134.661-2.826 2.283-.692 1.622-.54 3.223.324 3.585.873.363 2.134-.661 2.827-2.283.692-1.622.54-3.222-.325-3.585Zm4.395 2.482c-1.442-.405-3.064.797-3.612 2.69-.548 1.891.18 3.755 1.622 4.16 1.442.406 3.064-.796 3.612-2.688.548-1.892-.18-3.756-1.622-4.162Zm6.353 3.578c-1.925-.249-3.72 1.352-4.016 3.571-.295 2.22 1.024 4.226 2.949 4.468 1.925.248 3.72-1.352 4.016-3.572.295-2.219-1.024-4.225-2.95-4.467Zm-.283-10.917c-1.068-.946-3.022-.505-4.37.975-1.348 1.48-1.572 3.45-.512 4.389 1.067.946 3.021.505 4.37-.975 1.347-1.48 1.57-3.45.511-4.389Zm7.919 2.909c-1.406-1.351-3.872-1.117-5.494.534-1.622 1.65-1.803 4.075-.39 5.434 1.406 1.352 3.872 1.117 5.494-.533 1.622-1.65 1.803-4.076.39-5.435Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M27.424 34.313c2.246 0 4.066-1.834 4.066-4.097 0-2.263-1.82-4.097-4.066-4.097-2.246 0-4.066 1.834-4.066 4.097 0 2.263 1.82 4.097 4.066 4.097Zm5.276-9.558c2.197 0 3.98-1.72 3.98-3.842 0-2.121-1.782-3.84-3.98-3.84s-3.98 1.719-3.98 3.84c0 2.122 1.782 3.841 3.98 3.841Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M24.603 4.382c-.663-1.046-2.516-1.074-4.145-.071-1.622 1.003-2.4 2.667-1.738 3.713.664 1.046 2.517 1.074 4.146.071 1.622-1.003 2.4-2.667 1.737-3.713Zm9.227-3.361c-1.767 0-3.201.84-3.201 1.878 0 1.038 1.434 1.878 3.2 1.878 1.767 0 3.202-.84 3.202-1.878 0-1.039-1.435-1.878-3.201-1.878Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M37.81 16.046c2.247 0 4.067-1.567 4.067-3.5s-1.82-3.5-4.066-3.5c-2.246 0-4.066 1.567-4.066 3.5s1.82 3.5 4.066 3.5Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M51.609 8.625c-1.622-1.273-3.64-1.43-4.499-.363-.858 1.074-.238 2.966 1.384 4.24 1.623 1.273 3.641 1.43 4.5.362.857-1.074.237-2.966-1.385-4.24Z" clip-rule="evenodd"/>
+            <path fill="#8DB9E0" d="M42.217 30.05c2.197 0 3.98-1.796 3.98-4.012 0-2.216-1.783-4.012-3.98-4.012-2.198 0-3.98 1.796-3.98 4.012 0 2.216 1.782 4.012 3.98 4.012Z"/>
+            <path fill="#8DB9E0" fill-rule="evenodd" d="M51.15 27.49c-1.86-.093-3.46 1.508-3.568 3.578-.108 2.07 1.312 3.827 3.172 3.926 1.86.093 3.461-1.508 3.57-3.578.107-2.07-1.313-3.827-3.173-3.926Zm3.26-8.88c-1.327.057-2.329 1.785-2.228 3.862.094 2.07 1.247 3.706 2.574 3.642 1.327-.056 2.329-1.785 2.228-3.862-.094-2.07-1.248-3.706-2.574-3.642Zm9.98 1.576c-.526-1.75-1.672-2.96-2.559-2.696-.886.263-1.175 1.892-.649 3.635.527 1.75 1.673 2.959 2.56 2.696.887-.264 1.175-1.892.649-3.635Zm2.967 4.849c-.238-1.672-.894-2.966-1.471-2.88-.577.078-.858 1.5-.62 3.172.238 1.671.894 2.966 1.47 2.88.577-.078.858-1.5.62-3.172Zm-4.035 2.405c-.151-2.006-1.326-3.55-2.61-3.457-1.283.093-2.206 1.8-2.047 3.806.151 2.006 1.326 3.55 2.61 3.457 1.283-.093 2.206-1.8 2.047-3.806ZM4.694 22.732c-.8-.15-1.68.946-1.96 2.447-.282 1.501.136 2.831.936 2.98.8.15 1.68-.945 1.961-2.447.282-1.5-.137-2.83-.937-2.98Zm62.966 9.294c-.483-.078-1.089 1.145-1.348 2.724-.26 1.587-.08 2.931.404 3.01.483.078 1.088-1.146 1.348-2.725.26-1.586.08-2.93-.404-3.01Zm-9.052-.176c-1.478-.306-3.035 1.145-3.475 3.237-.44 2.09.397 4.033 1.875 4.339 1.478.306 3.035-1.145 3.475-3.237.44-2.091-.397-4.033-1.875-4.339Zm-47.43 15.002c-.93-1.195-2.178-1.792-2.783-1.33-.606.463-.34 1.8.59 2.995.93 1.195 2.178 1.792 2.784 1.33.605-.462.339-1.8-.591-2.995ZM7.306 36.394c-.374-1.437-1.362-2.425-2.191-2.212-.83.213-1.197 1.565-.822 3.002.375 1.437 1.362 2.425 2.192 2.212.829-.22 1.196-1.565.821-3.002ZM50.511 15.8c-1.11-1.843-3.59-2.654-5.544-1.815-1.954.84-2.639 3.024-1.529 4.866 1.11 1.842 3.59 2.653 5.545 1.814 1.953-.84 2.638-3.023 1.528-4.866Zm8.077-2.353c-1.391-1.473-3.129-1.693-3.886-.491-.75 1.195-.23 3.357 1.161 4.83 1.392 1.472 3.13 1.693 3.886.49.75-1.195.23-3.357-1.16-4.83ZM64.98 28.17c-.859-.022-1.601 1.444-1.652 3.286-.05 1.835.606 3.35 1.464 3.372.858.021 1.6-1.444 1.65-3.287.051-1.835-.605-3.35-1.463-3.371ZM33.313 7.211c-.447-1.529-2.595-2.183-4.794-1.45-2.2.732-3.627 2.567-3.18 4.097.447 1.529 2.596 2.183 4.795 1.45 2.199-.732 3.626-2.567 3.18-4.097ZM42.52 3.66c-1.68-.59-3.338-.064-3.699 1.174-.36 1.23.714 2.71 2.401 3.3 1.68.59 3.338.064 3.699-1.173.36-1.23-.714-2.71-2.401-3.3ZM45.656.372c-1.485-.605-2.985-.455-3.36.327-.367.783.534 1.906 2.019 2.511 1.485.605 2.985.455 3.36-.327.367-.783-.534-1.907-2.019-2.511ZM13.263 8.546c-.548-.52-1.896.163-3.014 1.529-1.117 1.366-1.572 2.888-1.024 3.407.548.52 1.896-.163 3.014-1.529 1.117-1.366 1.572-2.888 1.024-3.407ZM2.465 20.223c-.418-.107-1.045.917-1.398 2.29-.36 1.373-.31 2.568.108 2.675.418.106 1.045-.918 1.398-2.29.36-1.374.31-2.569-.108-2.675Zm3.008-6.171c-.44-.285-1.24.469-1.788 1.693-.548 1.223-.628 2.447-.188 2.731.44.285 1.24-.47 1.788-1.693.548-1.224.627-2.447.188-2.732Z" clip-rule="evenodd"/>
+          </g>
+          <defs>
+            <clipPath id="a">
+              <path fill="#fff" d="M0 0h68.182v50H0z"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </button>
+
+      <!-- Nav Menu -->
+      <nav
+        id="nav-menu"
+        class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 space-y-4 opacity-0 pointer-events-none transform translate-y-4 transition-all duration-300"
+        style="width: 180px;"
+      >
+        <a href="index.html" class="block font-semibold hover:underline" style="color: #142850;">Home</a>
+        <a href="services.html" class="block font-semibold hover:underline" style="color: #142850;">Services</a>
+        <a href="about.html" class="block font-semibold hover:underline" style="color: #142850;">About Us</a>
+      </nav>
+    </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navMenu = document.getElementById('nav-menu');
+    const navBtn = document.getElementById('nav-icon-btn');
+
+    let isOpen = false;
+
+    // Set initial state: hidden, scaled down from top right (near button)
+    gsap.set(navMenu, {
+      opacity: 0,
+      scale: 0.8,
+      y: 10,
+      transformOrigin: "top right",
+      pointerEvents: "none"
+    });
+
+    function openNavMenu() {
+      gsap.to(navMenu, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.35,
+        ease: "back.out(1.6)",
+        pointerEvents: "auto",
+        onStart: () => {
+          navMenu.style.pointerEvents = "auto";
+        }
+      });
+      navBtn.setAttribute('aria-expanded', 'true');
+      isOpen = true;
+    }
+
+    function closeNavMenu() {
+      gsap.to(navMenu, {
+        opacity: 0,
+        scale: 0.8,
+        y: 10,
+        duration: 0.25,
+        ease: "power2.in",
+        onComplete: () => {
+          navMenu.style.pointerEvents = "none";
+        }
+      });
+      navBtn.setAttribute('aria-expanded', 'false');
+      isOpen = false;
+    }
+
+    // Toggle nav on button click
+    navBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent immediate close when clicking button
+      if (isOpen) {
+        closeNavMenu();
+      } else {
+        openNavMenu();
+      }
+    });
+
+    // Close nav if user scrolls
+    window.addEventListener('scroll', () => {
+      if (isOpen) {
+        closeNavMenu();
+      }
+    });
+
+    // Close nav if clicking outside menu
+    document.addEventListener('click', (e) => {
+      if (isOpen && !navMenu.contains(e.target) && !navBtn.contains(e.target)) {
+        closeNavMenu();
+      }
+    });
+
+    // Close nav if pressing ESC
+    document.addEventListener('keydown', (e) => {
+      if (isOpen && e.key === "Escape") {
+        closeNavMenu();
+      }
+    });
+  });
+</script>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-content text-center">
+    <button class="modal-close" onclick="closeModal('successModal')">
+      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="modal-icon success-icon">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+    <h3 class="text-2xl font-bold text-slate-900 mb-4">Message Sent Successfully!</h3>
+    <p class="text-gray-600 mb-6 leading-relaxed">
+      Thank you for reaching out to us. We've received your message and our team will get back to you within 24 hours.
+    </p>
+    <button 
+      onclick="closeModal('successModal')"
+      class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div id="errorModal" class="modal-overlay">
+  <div class="modal-content text-center">
+    <button class="modal-close" onclick="closeModal('errorModal')">
+      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="modal-icon error-icon">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </div>
+    <h3 class="text-2xl font-bold text-slate-900 mb-4">Oops! Something went wrong</h3>
+    <p class="text-gray-600 mb-6 leading-relaxed">
+      We're sorry, but there was an error sending your message. Please try again or contact us directly at <a href="mailto:admin@rebus.ae" class="text-blue-600 hover:text-blue-700">admin@rebus.ae</a>
+    </p>
+    <div class="flex space-x-4 justify-center">
+      <button 
+        onclick="closeModal('errorModal')"
+        class="bg-gray-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-all duration-300"
+      >
+        Close
+      </button>
+      <button 
+        onclick="closeModal('errorModal'); document.querySelector('form').scrollIntoView({behavior: 'smooth'});"
+        class="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-red-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105"
+      >
+        Try Again
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section id="contact" class="relative py-20 overflow-hidden grid-background">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">Get In Touch</h2>
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto">Ready to bring your vision to life? Let's discuss your project and explore how our expertise can drive your success.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <!-- Contact Information -->
+      <div class="contact-info space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-6">Let's Start a Conversation</h3>
+          <p class="text-gray-600 leading-relaxed mb-8">
+            Whether you're planning a new construction project, need project management expertise, or want to learn more about our innovative solutions, we're here to help. Our team of experts is ready to discuss your requirements and provide tailored solutions.
+          </p>
+        </div>
+
+        <!-- Contact Cards -->
+        <div class="space-y-6">
+          <!-- Google Maps -->
+           <!-- Responsive Map (16:9) -->
+            <div class="w-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-lg">
+            <div class="aspect-[16/9]">
+                <iframe
+                class="w-full h-full border-0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                aria-label="Google Map - Rebus"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d907.7143872650887!2d54.3549584!3d24.4903921!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e6704cc2c5a3f%3A0xabbcf2919909b145!2sRebus%20Turnover%20Excellence!5e0!3m2!1sen!2sae!4v1756180219454!5m2!1sen!2sae"
+                ></iframe>
+            </div>
+            </div>
+          <!-- Office Location -->
+          <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900 mb-1">Visit Our Office</h4>
+              <p class="text-gray-600 text-sm">Abu Dhabi, United Arab Emirates, Sultan International Tower</p>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900 mb-1">Email Us</h4>
+              <a href="mailto:admin@rebus.ae" class="text-blue-600 hover:text-blue-700 text-sm transition-colors">
+                admin@rebus.ae
+              </a>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900 mb-1">Call Us</h4>
+              <a href="tel:+971 (02) 672 9802" class="text-blue-600 hover:text-blue-700 text-sm transition-colors">
+                +971 (02) 672 9802
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Response Time -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-slate-900">Quick Response</p>
+              <p class="text-sm text-gray-600">We typically respond within 24 hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 lg:p-10">
+          <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">Send Us a Message</h3>
+          
+          <!-- Replace YOUR_FORM_ID with your actual Formspree form ID -->
+          <form id="contactForm" action="https://formspree.io/f/xdkdzpdw" method="POST" class="space-y-6">
+            <!-- Name Fields -->
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  name="firstName" 
+                  required
+                  class="form-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  placeholder="John"
+                />
+              </div>
+              <div>
+                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  name="lastName" 
+                  required
+                  class="form-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                class="form-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                placeholder="john.doe@company.com"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone"
+                class="form-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                placeholder="+971 50 XXX XXXX"
+              />
+            </div>
+
+            <!-- File Attachment -->
+            <div>
+              <label for="files" class="block text-sm font-medium text-gray-700 mb-2">Attach Files</label>
+              <div class="form-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white hover:bg-gray-50 transition-colors cursor-pointer">
+                <input 
+                  type="file" 
+                  id="files" 
+                  name="files"
+                  multiple
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.zip,.rar"
+                  class="hidden"
+                  onchange="updateFileList(this)"
+                />
+                <label for="files" class="flex items-center space-x-3 cursor-pointer">
+                  <div class="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-gray-700" id="file-label">
+                      Click to attach files or drag and drop
+                    </p>
+                    <p class="text-xs text-gray-500">
+                      PDF, DOC, XLS, PPT, Images, ZIP (Max 10MB each)
+                    </p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                  </div>
+                </label>
+              </div>
+              <div id="file-list" class="mt-2 space-y-1"></div>
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="5"
+                required
+                class="form-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
+                placeholder="Tell us about your project requirements, timeline, and how we can help you achieve your goals..."
+              ></textarea>
+            </div>
+
+            <!-- Consent -->
+            <div class="flex items-start space-x-3">
+              <input 
+                type="checkbox" 
+                id="consent" 
+                name="consent" 
+                required
+                class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label for="consent" class="text-sm text-gray-600">
+                I agree to be contacted by Rebus regarding my inquiry and consent to the processing of my personal data in accordance with the privacy policy. *
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+              type="submit"
+              id="submitBtn"
+              class="submit-btn w-full py-4 px-6 text-white font-semibold rounded-xl shadow-lg flex items-center justify-center space-x-3 group"
+            >
+              <span>Send Message</span>
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+              </svg>
+            </button>
+
+            <!-- Hidden fields for Formspree -->
+            <input type="hidden" name="_subject" value="New Contact Form Submission from Rebus Website" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer ==================================================================================================================================-->
+
+<footer
+  id="footer"
+  class="relative text-white px-10 py-1 0 overflow-hidden font-sans"
+  style="background: linear-gradient(to right, #142850, #142850, #142850);"
+>
+
+  <!-- Animated glowing waves background -->
+  <div aria-hidden="true" class="animated-waves absolute inset-x-0 bottom-0 -z-10 overflow-hidden" style="height: 80px;">
+    <svg
+      id="wave1"
+      class="wave wave1"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style="position:absolute; bottom:0; width:150%; height:80px; left:-25%;"
+    >
+      <path
+        fill="rgba(30, 60, 120, 0.4)"
+        d="M0,160 C480,200 960,120 1440,160 L1440,320 L0,320 Z"
+      />
+    </svg>
+
+    <svg
+      id="wave2"
+      class="wave wave2"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style="position:absolute; bottom:0; width:150%; height:80px; left:-25%;"
+    >
+      <path
+        fill="rgba(60, 90, 160, 0.25)"
+        d="M0,180 C480,140 960,220 1440,180 L1440,320 L0,320 Z"
+      />
+    </svg>
+  </div>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-14 relative z-10">
+    <!-- About section -->
+    <div class="footer-section">
+      <h3 class="text-2xl font-extrabold mb-5 tracking-wide gradient-text">About Rebus @Official</h3>
+      <p class="leading-relaxed text-lg max-w-md">Rebus turns unfinished projects into success. With decades of UAE experience in construction, fit-out, and project management, we specialize in seamless project closeouts—transforming chaos into clarity. Our mission: to eliminate handover pain points using precision, process, and modern tools. From airports to towers and mega infrastructure, we don’t just build your vision—we complete it.</p>
+    </div>
+
+    <!-- Quick links -->
+    <div class="footer-section" style="color: #ffffff;">
+      <h3 class="text-2xl font-extrabold mb-5 tracking-wide gradient-text" style="color: #ffffff;">
+        Quick Links
+      </h3>
+      <ul class="space-y-4 text-lg">
+        <li><a href="index.html" class="footer-link" style="color: #ffffff;">Home</a></li>
+        <li><a href="services.html" class="footer-link" style="color: #fff;">Services</a></li>
+        <li><a href="index.html#project" class="footer-link" style="color: #ffffff;">Projects</a></li>
+        <li><a href="contact-us.html" class="footer-link" style="color: #ffffff;">Contact Us</a></li>
+        <li><a href="about.html" class="footer-link" style="color: #fff;">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="footer-section">
+      <h3 class="text-2xl font-extrabold mb-5 tracking-wide gradient-text">Connect With Us</h3>
+      <div class="flex space-x-8 mt-3 mb-6">
+        <!-- Social Icons -->
+        <a href="#" aria-label="Facebook" class="social-icon" target="_blank" rel="noopener noreferrer" title="Facebook">
+          <svg fill="currentColor" class="w-7 h-7 hover:text-blue-500 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.675 0h-21.35C.594 0 0 .594 0 1.326v21.348C0 23.405.594 24 1.325 24H12.82v-9.294H9.692V11.01h3.127V8.413c0-3.1 1.894-4.788 4.66-4.788 1.325 0 2.466.099 2.798.143v3.24l-1.922.001c-1.507 0-1.8.716-1.8 1.767v2.317h3.602l-.468 3.696h-3.134V24h6.138C23.406 24 24 23.406 24 22.674V1.326C24 .594 23.406 0 22.675 0z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="X (formerly Twitter)" class="social-icon" target="_blank" rel="noopener noreferrer" title="X">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14" class="w-7 h-7 hover:text-sky-400 transition-colors" aria-hidden="true">
+            <g clip-path="url(#a)">
+              <mask id="b" width="18" height="18" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:luminance">
+                <path fill="#fff" d="M0 0h14v14H0V0Z"/>
+              </mask>
+              <g mask="url(#b)">
+                <path fill="#fff" d="M11.025.656h2.147L8.482 6.03 14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71 11.025.656Zm-.755 11.4h1.19L3.78 1.877H2.504l7.766 10.179Z"/>
+              </g>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path fill="#fff" d="M0 0h14v14H0z"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <svg fill="currentColor" class="w-7 h-7 hover:text-pink-500 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 30 30">
+            <path fill="#fff" d="M23.75 3.75a2.5 2.5 0 0 1 2.5 2.5v17.5a2.5 2.5 0 0 1-2.5 2.5H6.25a2.5 2.5 0 0 1-2.5-2.5V6.25a2.5 2.5 0 0 1 2.5-2.5h17.5Zm-.625 19.375V16.5a4.075 4.075 0 0 0-4.075-4.075c-1.063 0-2.3.65-2.9 1.625v-1.388h-3.487v10.463h3.487v-6.163c0-.962.775-1.75 1.738-1.75a1.75 1.75 0 0 1 1.75 1.75v6.163h3.487ZM8.6 10.7a2.1 2.1 0 0 0 2.1-2.1 2.107 2.107 0 0 0-2.1-2.112A2.112 2.112 0 0 0 6.488 8.6c0 1.162.95 2.1 2.112 2.1Zm1.738 12.425V12.662H6.875v10.463h3.463Z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube" class="social-icon" target="_blank" rel="noopener noreferrer" title="YouTube">
+          <svg fill="currentColor" class="w-7 h-7 hover:text-red-600 transition-colors" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.498 6.186a2.983 2.983 0 00-2.097-2.1C19.424 3.5 12 3.5 12 3.5s-7.424 0-9.4.586a2.983 2.983 0 00-2.098 2.1A31.39 31.39 0 000 12a31.39 31.39 0 00.502 5.814 2.983 2.983 0 002.096 2.101c1.977.584 9.4.584 9.4.584s7.424 0 9.4-.584a2.983 2.983 0 002.098-2.1A31.39 31.39 0 0024 12a31.39 31.39 0 00-.502-5.814zM9.75 15.02V8.98l5.82 3.02-5.82 3.02z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="text-blue-200 text-sm max-w-md select-text">
+        <p><strong>Email:</strong> <a href="mailto:admin@rebus.ae" class="hover:underline text-white">admin@rebus.ae</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+971026729802" class="hover:underline text-white">+971 (02) 672 9802</a></p>
+        <p><strong>Address:</strong> PO Box: 3282, 12th Floor, Office No: 1203/1204,<br> Sultan International Tower, Corniche, Abu Dhabi, UAE</p>
+      </div>
+    </div>
+  </div>
+  <p class="mt-16 text-center tracking-wide text-sm select-none relative z-10 copyright-text">&copy; 2025 Rebus @Official. All rights reserved.</p>
+
+  <style>
+    /* Styles same as before */
+    .footer-section h3 {
+      margin-bottom: 1rem;     /* keep enough breathing room */
+      font-size: 1.5rem;       /* slightly smaller but still prominent */
+      line-height: 1.3;
+    }
+
+    .footer-section ul {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Connect With Us specific tweaks */
+    .footer-section:last-child {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;            /* less vertical space */
+    }
+
+    .footer-section:last-child .flex.space-x-8 {
+      gap: 1rem;               /* slightly tighter icon spacing */
+      margin-top: 0;
+      margin-bottom: 0.75rem;  /* reduce bottom margin */
+    }
+
+    .footer-section .text-blue-200 {
+      font-size: 0.875rem;
+      line-height: 1.4;
+      margin-top: 0;           /* remove unnecessary top margin */
+    }
+
+    /* Reduce overall footer padding */
+    #footer {
+      padding-top: 2rem;       /* 32px */
+      padding-bottom: 2rem;    /* 32px */
+      font-size: 1rem;
+    }
+
+    /* Optional: Reduce bottom copyright margin */
+    .copyright-text {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #a0a0a0;
+    }
+
+    .text-blue-200 {
+      font-size: 0.875rem;       /* keep small but readable */
+      line-height: 1.4;          /* decent line spacing */
+      max-width: 400px;          /* control width */
+      margin-top: 0;
+      margin-bottom: 0;
+      user-select: text;         /* allow text selection */
+      color: #a0c4ff;            /* softer blue tone */
+    }
+
+    .text-blue-200 strong {
+      font-weight: 600;          /* slightly bolder */
+      color: #e0e7ff;            /* lighter highlight color */
+    }
+
+    .text-blue-200 a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .text-blue-200 a:hover {
+      text-decoration: underline;
+      color: #90caf9;            /* lighter hover blue */
+    }
+    
+  </style>
+  <script>
+    // Wave path shapes to morph between
+    const wave1Start = "M0,160 C480,200 960,120 1440,160 L1440,320 L0,320 Z";
+    const wave1End =   "M0,140 C480,100 960,180 1440,140 L1440,320 L0,320 Z";
+
+    const wave2Start = "M0,180 C480,140 960,220 1440,180 L1440,320 L0,320 Z";
+    const wave2End =   "M0,200 C480,240 960,160 1440,200 L1440,320 L0,320 Z";
+
+    const wave1 = document.querySelector("#wave1 path");
+    const wave2 = document.querySelector("#wave2 path");
+
+    // Morph function with GSAP timelines
+    function morphWave(path, startShape, endShape, duration) {
+      return gsap.timeline({ repeat: -1, yoyo: true, defaults: { duration: duration, ease: "sine.inOut" } })
+        .to(path, { attr: { d: endShape } })
+        .to(path, { attr: { d: startShape } });
+    }
+
+    // Start morph animations
+    morphWave(wave1, wave1Start, wave1End, 20);
+    morphWave(wave2, wave2Start, wave2End, 25);
+
+    // Add horizontal floating animation for the whole SVGs
+    gsap.to("#wave1", {
+      x: 15,
+      duration: 20,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+    gsap.to("#wave2", {
+      x: -20,
+      duration: 25,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+  </script>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Contact form animation
+gsap.fromTo('.contact-form', 
+  { 
+    opacity: 0, 
+    y: 60
+  },
+  { 
+    opacity: 1, 
+    y: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: '.contact-form',
+      start: "top 80%",
+      toggleActions: "play none none none"
+    }
+  }
+);
+
+// Contact info animation
+gsap.fromTo('.contact-info', 
+  { 
+    opacity: 0, 
+    x: -60
+  },
+  { 
+    opacity: 1, 
+    x: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: '.contact-info',
+      start: "top 80%",
+      toggleActions: "play none none none"
+    }
+  }
+);
+
+// Form field animations
+gsap.utils.toArray('.form-field').forEach((field, i) => {
+  field.addEventListener('focus', () => {
+    gsap.to(field, {
+      scale: 1.02,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+  
+  field.addEventListener('blur', () => {
+    gsap.to(field, {
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+});
+
+// Submit button animation
+const submitBtn = document.querySelector('.submit-btn');
+submitBtn.addEventListener('mouseenter', () => {
+  gsap.to(submitBtn, {
+    scale: 1.05,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+submitBtn.addEventListener('mouseleave', () => {
+  gsap.to(submitBtn, {
+    scale: 1,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+// Modal Functions
+function showModal(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.classList.add('show');
+  
+  // Animate modal entrance
+  gsap.fromTo(modal.querySelector('.modal-content'), 
+    { scale: 0.8, opacity: 0 },
+    { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }
+  );
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  
+  // Animate modal exit
+  gsap.to(modal.querySelector('.modal-content'), {
+    scale: 0.8,
+    opacity: 0,
+    duration: 0.3,
+    ease: "power3.in",
+    onComplete: () => {
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
+
+// Close modal when clicking overlay
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeModal(overlay.id);
+    }
+  });
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const activeModal = document.querySelector('.modal-overlay.show');
+    if (activeModal) {
+      closeModal(activeModal.id);
+    }
+  }
+});
+
+// Enhanced Form submission handling
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const submitButton = document.getElementById('submitBtn');
+  const originalText = submitButton.innerHTML;
+  
+  // Change button to loading state
+  submitButton.innerHTML = `
+    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    Sending...
+  `;
+  submitButton.disabled = true;
+  
+  try {
+    // Create FormData object
+    const formData = new FormData(this);
+    
+    // Submit form to Formspree
+    const response = await fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    // Reset button
+    submitButton.innerHTML = originalText;
+    submitButton.disabled = false;
+    
+    if (response.ok) {
+      // Success - show success modal and reset form
+      showModal('successModal');
+      this.reset();
+      
+      // Reset file upload display
+      document.getElementById('file-label').textContent = 'Click to attach files or drag and drop';
+      document.getElementById('file-list').innerHTML = '';
+      
+    } else {
+      // Error from server
+      showModal('errorModal');
+    }
+  } catch (error) {
+    // Network error or other issues
+    console.error('Form submission error:', error);
+    
+    // Reset button
+    submitButton.innerHTML = originalText;
+    submitButton.disabled = false;
+    
+    // Show error modal
+    showModal('errorModal');
+  }
+});
+
+// File upload functionality
+function updateFileList(input) {
+  const fileList = document.getElementById('file-list');
+  const fileLabel = document.getElementById('file-label');
+  
+  if (input.files.length > 0) {
+    fileLabel.textContent = `${input.files.length} file(s) selected`;
+    fileList.innerHTML = '';
+    
+    Array.from(input.files).forEach((file, index) => {
+      const fileItem = document.createElement('div');
+      fileItem.className = 'flex items-center justify-between bg-blue-50 px-3 py-2 rounded-lg text-sm';
+      
+      const fileSize = (file.size / 1024 / 1024).toFixed(2);
+      fileItem.innerHTML = `
+        <div class="flex items-center space-x-2">
+          <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span class="text-gray-700 font-medium">${file.name}</span>
+          <span class="text-gray-500">(${fileSize} MB)</span>
+        </div>
+        <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      `;
+      fileList.appendChild(fileItem);
+    });
+  } else {
+    fileLabel.textContent = 'Click to attach files or drag and drop';
+    fileList.innerHTML = '';
+  }
+}
+
+function removeFile(index) {
+  const input = document.getElementById('files');
+  const dt = new DataTransfer();
+  
+  Array.from(input.files).forEach((file, i) => {
+    if (i !== index) {
+      dt.items.add(file);
+    }
+  });
+  
+  input.files = dt.files;
+  updateFileList(input);
+}
+
+// Drag and drop functionality
+const fileDropArea = document.querySelector('label[for="files"]').parentElement;
+
+fileDropArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  fileDropArea.classList.add('border-blue-400', 'bg-blue-50');
+});
+
+fileDropArea.addEventListener('dragleave', (e) => {
+  e.preventDefault();
+  fileDropArea.classList.remove('border-blue-400', 'bg-blue-50');
+});
+
+fileDropArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  fileDropArea.classList.remove('border-blue-400', 'bg-blue-50');
+  
+  const files = e.dataTransfer.files;
+  const input = document.getElementById('files');
+  input.files = files;
+  updateFileList(input);
+});
+</script>
+
+</body>
+</html>
